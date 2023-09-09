@@ -1,0 +1,63 @@
+import { FC } from 'react';
+import { DateTime } from 'luxon';
+import { LuClock9 } from 'react-icons/lu';
+
+import { Hour, WeatherAPIResponse } from 'features/feature-weather/types';
+import { currentTime, time24Hour } from 'utils/dateTimeHelpers';
+import Box from 'components/Box/Box';
+
+const HourlyForecast: FC<{ data?: WeatherAPIResponse; backgroundColor: string }> = ({ data, backgroundColor }) => {
+    const currentDay = data?.forecast?.forecastday?.[0];
+    const tomorrow = data?.forecast?.forecastday?.[1];
+    const tomorrowSunset = time24Hour(tomorrow?.astro.sunset);
+    const tomorrowSunsetToDateTime = DateTime.fromFormat(tomorrowSunset, "hh:mm a");
+
+    const tomorrowSubsetTimestamp: string = tomorrowSunsetToDateTime.toFormat('HH.mm');
+    const removePrevHours = (arr?: Hour[], num?: number) => num && arr?.filter((element) => parseFloat(DateTime.fromSeconds(element.time_epoch).toFormat('HH.mm')) >= num);
+    const removeFutureHours = (arr?: Hour[], num?: number) => arr?.filter((element) => {
+        const dateTime = DateTime.fromFormat(element.time, "yyyy-MM-dd HH:mm");
+        const formattedTime = dateTime.toFormat("HH.mm");
+
+        if (num && parseFloat(formattedTime) <= num) {
+            return element;
+        }
+    });
+
+    const todayHours = removePrevHours(currentDay?.hour, parseFloat(currentTime));
+    const tomorrowHours = removeFutureHours(tomorrow?.hour, parseFloat(tomorrowSubsetTimestamp));
+    const hours = tomorrowHours && todayHours ? todayHours?.concat(tomorrowHours) : [];
+    
+    return (
+        <Box
+            backgroundColor={backgroundColor}
+            content={{
+                children: (
+                    <div className='flex overflow-auto'>
+                        {hours?.map((hourItem, index) => {
+                            return (
+                                <div
+                                    key={hourItem.time}
+                                    className={`flex flex-col items-center justify-center gap-3 ${index === 0 ? 'my-[0.975rem] mr-[0.975rem] ml-[0.5rem] md:my-[1.5rem] md:mr-[1.5rem]' : 'm-[0.975rem] md:m-[1.5rem] md:p-2'}`}
+                                >
+                                    {index === 0 ?
+                                        (<p className='h-[2rem] md:text-[1.2rem]'>Now</p>)
+                                        :
+                                        (<p className='h-[2rem] md:text-[1.2rem]'>{DateTime.fromSeconds(hourItem.time_epoch).toFormat('HH')}</p>)
+                                    }
+                                    <div className='w-[1.5rem] h-[1.5rem] flex items-center justify-center'>
+                                        <img src={data?.current.condition.icon} alt={data?.current.condition.text} className='w-[1.5rem] h-[1.5rem] md:w-[2rem] md:h-[2rem]' />
+                                    </div>
+                                    <p className='md:text-[1.2rem]'>{Math.round(hourItem.temp_c)}°</p>
+                                </div>
+                            );
+                        })}
+                    </div>
+                )
+            }}
+            title='HOURLY FORECAST'
+            icon={LuClock9}
+        />
+    );
+};
+
+export default HourlyForecast;

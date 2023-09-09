@@ -1,3 +1,16 @@
+to get weather weather_conditions i used 
+https://www.weatherapi.com/docs/weather_conditions.json
+
+to get weather icons i used 
+https://cdn.weatherapi.com/weather.zip
+
+weatherapi docs
+https://www.weatherapi.com/docs/
+
+background will change according to the time (day/night) and the weather (e.g. "Sunny" or Patchy light snow)
+
+fetching from api requires both           'X-RapidAPI-Key': and 'X-RapidAPI-Host': you could generate these values from ''
+            
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -44,3 +57,5 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+# simple-weather
+# simple-weather-app
