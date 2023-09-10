@@ -10,7 +10,7 @@ export const Snackbar: FC<
     onClose?: () => void;
     children?: ReactNode | ReactNode[];
   } & React.HTMLAttributes<HTMLDivElement>
-> = ({ open, children, message, autoHideDuration, onClose, ...props }) => {
+> = ({ open, children, message, autoHideDuration, onClose }) => {
   useEffect(() => {
     if (autoHideDuration && open) {
       setTimeout(() => {
@@ -27,7 +27,7 @@ export const Snackbar: FC<
           animate={{ opacity: 1, y: 0, x: '-50%' }}
           exit={{ opacity: 0, y: 80, x: '-50%' }}
         >
-          {children ? children : <div className="regular-snack">{message}</div>}
+          {children ? children : <div className="snackbar-message">{message}</div>}
         </SnackbarWrapper>
       )}
     </AnimatePresence>

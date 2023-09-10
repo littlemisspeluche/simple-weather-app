@@ -4,10 +4,13 @@ export const AppWrapper = styled.div`
   position: relative;
   margin: 0;
 
-  p {
+  p, input {
     font-family: PT Sans;
+  }
+
+  p {
     color: #F0F0F0;
-    opacity: 0.5;
+    opacity: 0.8;
   }
 
   .text-dark {

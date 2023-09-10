@@ -42,20 +42,21 @@ function App() {
   });
 
   if (!isIOCReady) {
-    return <>Loading</>;
+    return <>Loading...</>;
   }
+
   return (
     <QueryClientProvider client={queryClient}>
       <AppWrapper>
         <AppProvider>
-          <div className='flex'>
-            <div className={`h-[100%] bg-[#040e26] block max-w-[13rem] pt-[2.5rem] fixed ${!isSidebarOpen ? 'max-w-[4rem]' : ''}`}>
+          <div className='flex h-[100%]'>
+            <div className={`h-[100%] bg-[#F0F0F0] opacity-[0.8] block max-w-[13rem] pt-[2.5rem] fixed ${!isSidebarOpen ? 'max-w-[4rem]' : ''}`}>
               <Sidebar
                 isHidden={!isSidebarOpen}
                 menuToggle={sidebarToggle}
               />
             </div>
-            <main className={`w-[100%] overflow-y-scroll ${isSidebarOpen ? "ml-[12.5rem]" : "ml-[3.5rem]"}`}>
+            <main className={`w-[100%] overflow-y-scroll ${isSidebarOpen ? "ml-[11.5rem]" : "ml-[3.5rem]"}`}>
               <ErrorBoundary FallbackComponent={MainErrorBoundary}>
                 <AppRouter />
               </ErrorBoundary>

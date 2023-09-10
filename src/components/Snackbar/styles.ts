@@ -12,7 +12,7 @@ export const SnackbarWrapper = motion(styled.div`
   align-items: center;
   justify-content: center;
   
-  .regular-snack {
+  .snackbar-message {
     font-family: PT Sans;
     background: #ffffff;
     color: #000000;

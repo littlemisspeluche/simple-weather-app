@@ -2,13 +2,13 @@ import { FC, useState } from "react";
 import { DateTime } from 'luxon';
 import { BsCalendar3 } from 'react-icons/bs';
 
-import { ForecastDay, WeatherAPIResponse } from "features/feature-weather/types";
+import { ForecastDay, Forecast as ForecastType } from "features/feature-weather/types";
 import { todayName } from "utils/dateTimeHelpers";
 import Box from "components/Box/Box";
 import { ForecastTempsScaleWrapper } from "./styles";
 import { useWindowWidth } from "hooks/useWindowWidth";
 
-const Forecast: FC<{ data?: WeatherAPIResponse; backgroundColor: string; secondaryBackgroundColor: string; }> = ({ data, backgroundColor, secondaryBackgroundColor }) => {
+const Forecast: FC<{ forecast: ForecastType; backgroundColor: string; }> = ({ forecast, backgroundColor }) => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
     useWindowWidth((width) => {
@@ -56,7 +56,7 @@ const Forecast: FC<{ data?: WeatherAPIResponse; backgroundColor: string; seconda
                     content={{
                         children: (
                             <>
-                                {data?.forecast.forecastday.map((dayItem) => {
+                                {forecast.forecastday.map((dayItem) => {
                                     return (
                                         <div className='flex items-center justify-between w-[100%]'>
                                             <Day item={dayItem} />
@@ -76,7 +76,7 @@ const Forecast: FC<{ data?: WeatherAPIResponse; backgroundColor: string; seconda
                     content={{
                         children: (
                             <div className='w-[100%] grid gap-y-2 gap-x-2 grid-cols-2 lg:grid-cols-3'>
-                                {data?.forecast.forecastday.map((dayItem) => {
+                                {forecast.forecastday.map((dayItem) => {
                                     return (
                                         <Box
                                             key={dayItem.date}

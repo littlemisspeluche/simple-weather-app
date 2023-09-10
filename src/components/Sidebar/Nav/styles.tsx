@@ -29,17 +29,12 @@ export const LinkWrapper = styled.div<{ active?: boolean }>`
     margin: 0 auto;
   }
 
-  &.menu-toggle {
-    margin: 0;
-    cursor: pointer;
-  }
-
   .link {
     display: flex;
     gap: 1rem;
     align-items: center;
     justify-content: start;
-    color: #fff;
+    color: #040e26;
     text-decoration: none;
     z-index: 5;
     padding: 0.5rem 1rem;
@@ -59,7 +54,7 @@ export const LinkWrapper = styled.div<{ active?: boolean }>`
     width: 100%;
     height: 100%;
     border-radius: 2rem;
-    background-color: rgb(255 255 255 / 15%);
+    background-color: rgba(92, 84, 112, 0.15);
     z-index: 1;
   }
 

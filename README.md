@@ -1,61 +1,21 @@
-to get weather weather_conditions i used 
-https://www.weatherapi.com/docs/weather_conditions.json
+# Simple Weather App
 
-to get weather icons i used 
-https://cdn.weatherapi.com/weather.zip
+This repository consists of the code of the simple-weather-app.
+This project fetch WeatherAPI forecast and updates the dashboard data and modify the view: background will change according to the time (day/night) and the weather (e.g. "Sunny", "Patchy light snow" etc.)
 
-weatherapi docs
-https://www.weatherapi.com/docs/
+Please go over all the steps stated below in order to run this code locally. 
 
-background will change according to the time (day/night) and the weather (e.g. "Sunny" or Patchy light snow)
+## Start Frontend locally
 
-fetching from api requires both           'X-RapidAPI-Key': and 'X-RapidAPI-Host': you could generate these values from ''
-            
-# Getting Started with Create React App
+- Clone the [weather app](https://github.com/littlemisspeluche/simple-weather-app)
+- Create .env file in the root directory of the project.
+- Visit [WeatherAPI](https://rapidapi.com/weatherapi/api/weatherapi-com/)
+- Sign up / Login to create the necessary keys
+- Copy 'X-RapidAPI-Key' and 'X-RapidAPI-Host' values
+- Add to .env new key "REACT_APP_API_KEY" and paste 'X-RapidAPI-Key' value
+- Add to .env new key "REACT_APP_RAPID_API_HOST" and paste 'X-RapidAPI-Host' value
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- In order to install project packages you only need to run `yarn`
+- In order to start it locally you only need to run `yarn start`, and then open the browser in http://localhost:3000
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-# simple-weather
-# simple-weather-app
+To see full API documentation go over to: https://www.weatherapi.com/docs/

@@ -7,7 +7,8 @@ const Box: FC<TBox> = (args) => {
     const contentChildren = (args.content as BoxChildren).children;
 
     return (
-        <div className='w-[100%] p-4 rounded-lg flex flex-col gap-3 md:p-6' style={{ backgroundColor: args.backgroundColor }}>
+        <>
+        {((content.main && content.note) || contentChildren) && <div className='w-[100%] p-4 rounded-lg flex flex-col gap-3 md:p-6' style={{ backgroundColor: args.backgroundColor }}>
             {(Icon || args.title) && (
                 <div className='flex items-center gap-1 mb-2'>
                     {Icon && <Icon size="1rem" color="#F0F0F0" />}
@@ -20,7 +21,8 @@ const Box: FC<TBox> = (args) => {
                     <p className="text-bright">{content.note}</p>
                 </>
             ) : contentChildren}
-        </div>
+        </div>}
+        </>
     );
 };
 

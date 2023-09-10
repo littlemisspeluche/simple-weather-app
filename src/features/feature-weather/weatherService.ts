@@ -5,7 +5,7 @@ import { IWeatherService, WeatherAPIResponse } from './types';
 export const weatherServiceFactory = (): IWeatherService => {
   return {
     fetchWeather: async () => {
-      const response = await axios.get('https://weatherapi-com.p.rapidapi.com/foreca22738st.json',
+      const response = await axios.get('https://weatherapi-com.p.rapidapi.com/forecast.json',
         {
           params: {
             q: 'Tel Aviv',
@@ -15,15 +15,14 @@ export const weatherServiceFactory = (): IWeatherService => {
             serialize: (params) => qs.stringify(params, { encode: false }),
           },
           headers: {
-            'X-RapidAPI-Key': '0dc6bbd1f8msh3868012b61f3923p11097ejsn749766b5828e',
-            'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
+            'X-RapidAPI-Key': process.env.REACT_APP_API_KEY,
+            'X-RapidAPI-Host': process.env.REACT_APP_RAPID_API_HOST
           }
         }
-      )
-      //   .catch((e: any) => ({
-      //   status: e.status || 400,
-      //   data: {},
-      // }));
+      ).catch((e: any) => ({
+        status: e.status || 400,
+        data: {},
+      }));
 
       return response as { status: number;  data: WeatherAPIResponse};
     },

@@ -1,15 +1,14 @@
 import { FC } from 'react';
+import { TbFaceIdError } from 'react-icons/tb';
 
 const MainErrorBoundary: FC = () => {
   return (
-    <div className="flex h-full w-full items-center justify-center">
+    <div className="flex h-full w-full items-center justify-center m-6">
       <div className="flex w-fit items-center gap-x-4">
-        <div className="flex h-[9rem] w-[9rem] items-center justify-center rounded-full bg-[#fff] shadow-box">
-          {/* <img src={Logo} alt="logo" className="w-[5rem]" /> */}
-        </div>
+        <TbFaceIdError size={'5rem'} />
         <div className="flex w-fit flex-col items-start gap-y-2 text-main">
           <div className="text-4xl font-bold">Oops...</div>
-          <span>Oops, Something went wrong</span>
+          <span>Something went wrong</span>
         </div>
       </div>
     </div>

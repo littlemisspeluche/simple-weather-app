@@ -3,13 +3,13 @@ import { DateTime } from 'luxon';
 import { PiSunHorizonBold } from 'react-icons/pi';
 import { MdOutlineWbSunny } from 'react-icons/md';
 
-import { WeatherAPIResponse } from "features/feature-weather/types";
-import { time24Hour, currentTime } from 'utils/dateTimeHelpers';
+import { Forecast } from "features/feature-weather/types";
+import { time24Hour } from 'utils/dateTimeHelpers';
 import { SunriseToSunSetScaleWrapper } from "./styles";
 
-const SunriseToSunSet: FC<{ data?: WeatherAPIResponse; backgroundColor: string; }> = ({ data, backgroundColor }) => {
-    const currentDay = data?.forecast.forecastday[0];
-    const tomorrow = data?.forecast.forecastday[1];
+const SunriseToSunSet: FC<{ forecast: Forecast; backgroundColor: string; currentTime: string }> = ({ forecast, backgroundColor, currentTime }) => {
+    const currentDay = forecast.forecastday[0];
+    const tomorrow = forecast.forecastday[1];
 
     const sunrise = time24Hour(currentDay?.astro.sunrise);
     const sunset = time24Hour(currentDay?.astro.sunset);

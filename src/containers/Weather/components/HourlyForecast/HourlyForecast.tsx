@@ -2,38 +2,28 @@ import { FC } from 'react';
 import { DateTime } from 'luxon';
 import { LuClock9 } from 'react-icons/lu';
 
-import { Hour, WeatherAPIResponse } from 'features/feature-weather/types';
-import { currentTime, time24Hour } from 'utils/dateTimeHelpers';
+import { Forecast, Current } from 'features/feature-weather/types';
+import { time24Hour } from 'utils/dateTimeHelpers';
 import Box from 'components/Box/Box';
+import { removeFutureHours, removePrevHours } from 'containers/Weather/utils/hourlyForecastHelpers';
 
-const HourlyForecast: FC<{ data?: WeatherAPIResponse; backgroundColor: string }> = ({ data, backgroundColor }) => {
-    const currentDay = data?.forecast?.forecastday?.[0];
-    const tomorrow = data?.forecast?.forecastday?.[1];
+const HourlyForecast: FC<{ forecast: Forecast; current: Current; backgroundColor: string; currentTime: string }> = ({ forecast, backgroundColor, currentTime, current }) => {
+    const currentDay = forecast.forecastday[0];
+    const tomorrow = forecast.forecastday[1];
     const tomorrowSunset = time24Hour(tomorrow?.astro.sunset);
     const tomorrowSunsetToDateTime = DateTime.fromFormat(tomorrowSunset, "hh:mm a");
-
     const tomorrowSubsetTimestamp: string = tomorrowSunsetToDateTime.toFormat('HH.mm');
-    const removePrevHours = (arr?: Hour[], num?: number) => num && arr?.filter((element) => parseFloat(DateTime.fromSeconds(element.time_epoch).toFormat('HH.mm')) >= num);
-    const removeFutureHours = (arr?: Hour[], num?: number) => arr?.filter((element) => {
-        const dateTime = DateTime.fromFormat(element.time, "yyyy-MM-dd HH:mm");
-        const formattedTime = dateTime.toFormat("HH.mm");
-
-        if (num && parseFloat(formattedTime) <= num) {
-            return element;
-        }
-    });
-
     const todayHours = removePrevHours(currentDay?.hour, parseFloat(currentTime));
     const tomorrowHours = removeFutureHours(tomorrow?.hour, parseFloat(tomorrowSubsetTimestamp));
-    const hours = tomorrowHours && todayHours ? todayHours?.concat(tomorrowHours) : [];
-    
+    const hours = todayHours ? todayHours.concat(tomorrowHours) : [];
+
     return (
         <Box
             backgroundColor={backgroundColor}
             content={{
                 children: (
                     <div className='flex overflow-auto'>
-                        {hours?.map((hourItem, index) => {
+                        {hours.map((hourItem, index) => {
                             return (
                                 <div
                                     key={hourItem.time}
@@ -45,7 +35,7 @@ const HourlyForecast: FC<{ data?: WeatherAPIResponse; backgroundColor: string }>
                                         (<p className='h-[2rem] md:text-[1.2rem]'>{DateTime.fromSeconds(hourItem.time_epoch).toFormat('HH')}</p>)
                                     }
                                     <div className='w-[1.5rem] h-[1.5rem] flex items-center justify-center'>
-                                        <img src={data?.current.condition.icon} alt={data?.current.condition.text} className='w-[1.5rem] h-[1.5rem] md:w-[2rem] md:h-[2rem]' />
+                                        <img src={current.condition.icon} alt={current.condition.text} className='w-[1.5rem] h-[1.5rem] md:w-[2rem] md:h-[2rem]' />
                                     </div>
                                     <p className='md:text-[1.2rem]'>{Math.round(hourItem.temp_c)}°</p>
                                 </div>
