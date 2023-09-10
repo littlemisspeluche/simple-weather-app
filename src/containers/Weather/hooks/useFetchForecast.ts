@@ -25,10 +25,10 @@ export const useFetchForecast = () => {
         },
         {
             suspense: false,
-            // staleTime: 30 * 1000,
-            // refetchInterval: 30 * 1000,
-            // refetchOnMount: true,
-            // retry: 1,
+            staleTime: 30 * 1000,
+            refetchInterval: 30 * 1000,
+            refetchOnMount: true,
+            retry: 1,
             useErrorBoundary: true,
         }
     );
